@@ -1,5 +1,9 @@
 # coding=utf-8
 from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.wait import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.common.exceptions import TimeoutException
 
 """
 Author: Gracefulife
@@ -33,10 +37,22 @@ class DcInsideParser:
             link = post.find_elements_by_tag_name('a')[0]
             self._posts.append(link.get_attribute('href'))
 
-            # def load_post(self):
+    def load_post(self):
+        # 각 글에 해당하는 딕셔너리에 댓글리스트 넣을 것
+        for post in self._posts:
+            print 'load post = ' + post
+            self._browser.get(post)
+            try:
+                wait = WebDriverWait(self._browser, 10)
+                replies = wait.until(EC.presence_of_all_elements_located((By.CLASS_NAME, 'reply')))
+                for reply in replies:
+                    print reply.text
+            except TimeoutException:
+                continue
 
 
 parser = DcInsideParser(r'D:\Dropbox\workspaces\python\phantomjs-2.1.1-windows\bin\phantomjs.exe', 'programming')
 parser.set_page_no(2)
 parser.load_document()
 parser.load_posts()
+parser.load_post()
