@@ -2,7 +2,7 @@
 
 개발이 끝나지 않았음 (조금 남았음)  
 
-![Promo](http://postimg.org/image/g1gslstdt/cdbb3ffb/)
+![Promo](http://s8.postimg.org/ivjxz8vk5/commentcrawl.jpg)
 
 python 2.7 + selenium  
 누군가 찾는 것 같아서 만듬  
